@@ -4,11 +4,14 @@ import {
   Text,
   View,
   ScrollView,
+  Button,
   RefreshControl,
 } from 'react-native';
 import { registerRootComponent } from 'expo'; // import it explicitly
 import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
+import getDirections from 'react-native-google-maps-directions';
+
 import fetchStationsData, {
   StationInfo,
   StationsInfo,
@@ -21,6 +24,9 @@ const App = () => {
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
   const [closestStation, setClosestStation] = React.useState<StationInfo>(null);
   const [error, setError] = React.useState<Error>(null);
+  const [location, setLocation] = React.useState<LocationData>(null);
+
+  const isDirectionButtonEnabled = closestStation && location;
 
   React.useEffect(() => {
     (async (): Promise<void> => await getClosestStationData())();
@@ -32,13 +38,34 @@ const App = () => {
     setRefreshing(false);
   }, [refreshing]);
 
+  const openInMaps = () => {
+    const directionData = {
+      source: {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      },
+      destination: {
+        latitude: closestStation.latitude,
+        longitude: closestStation.longitude,
+      },
+      params: [
+        {
+          key: 'travelmode',
+          value: 'walking',
+        },
+      ],
+    };
+    getDirections(directionData);
+  };
+
   // Gets the station data and computes the closest station from the given location
   const getClosestStationData = async (): Promise<void> => {
     const maybeLocation = await getLocationAsync();
-
     if ((maybeLocation as Error).code) {
       return setError(maybeLocation as Error);
     }
+
+    setLocation(maybeLocation as LocationData);
 
     const maybeStationsData = await fetchStationsData();
 
@@ -75,6 +102,11 @@ const App = () => {
             : 'Loading'}
         </Text>
         {error && <Text>{error.message}</Text>}
+        <Button
+          disabled={!isDirectionButtonEnabled}
+          onPress={openInMaps}
+          title='Open in Maps'
+        />
       </ScrollView>
     </View>
   );
