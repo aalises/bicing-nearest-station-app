@@ -1,6 +1,11 @@
 import ERRORS, { Error } from '../utils/constants/errors';
+import {
+  getCachedData,
+  setCachedData,
+  isDataCachedValid,
+} from '../services/cache';
 
-type StationInfoAPIResponse = {
+export type StationInfoAPIResponse = {
   last_updated: number;
   ttl: number;
   data: {
@@ -42,7 +47,6 @@ type StationStatusAPIResponse = {
 };
 
 export type StationsInfo = {
-  timestamp: number;
   data: {
     stations: Array<StationInfo>;
   };
@@ -60,17 +64,30 @@ export type StationInfo = {
 
 const fetchStationsData = async (): Promise<StationsInfo | Error> => {
   try {
-    const stationInfoResponse = await fetch(
-      'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_information',
-    );
-    const stationInfoData: StationInfoAPIResponse = await stationInfoResponse.json();
+    let stationInfoData: StationInfoAPIResponse = null;
+    //Set the info data from the cache if it's valid or fetch it otherwise
+    const isDataCacheValid = await isDataCachedValid();
+
+    if (isDataCacheValid) {
+      const { data } = await getCachedData();
+      stationInfoData = data;
+    } else {
+      const stationInfoResponse = await fetch(
+        'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_information',
+      );
+
+      stationInfoData = await stationInfoResponse.json();
+      await setCachedData(JSON.stringify({ stationInfoData }));
+    }
+
+    if (!stationInfoData) return ERRORS.FETCH;
 
     const stationStatusResponse = await fetch(
       'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_status',
     );
     const stationStatusData: StationStatusAPIResponse = await stationStatusResponse.json();
 
-    if (!(stationInfoData && stationStatusData)) return ERRORS.FETCH;
+    if (!stationStatusData) return ERRORS.FETCH;
 
     return sanitizeStationsData(stationInfoData, stationStatusData);
   } catch (error) {
@@ -106,7 +123,6 @@ const sanitizeStationsData = (
     .filter(({ status }) => status === 'IN_SERVICE');
 
   return {
-    timestamp: new Date().getTime(),
     data: {
       stations: sanitizedStations,
     },

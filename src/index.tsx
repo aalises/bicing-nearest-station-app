@@ -99,7 +99,7 @@ const App = () => {
                 '-'}m away, and has available ${
                 closestStation.numBikesAvailable
               } bike(s) out of ${closestStation.capacity}`
-            : 'Loading'}
+            : !error && 'Loading'}
         </Text>
         {error && <Text>{error.message}</Text>}
         <Button
