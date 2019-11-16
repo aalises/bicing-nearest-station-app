@@ -4,9 +4,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "lint": "eslint --config=.eslintrc.js src/**/*"
+    "lint": "eslint --config=.eslintrc.js src/**/*",
+    "test": "jest"
   },
   "dependencies": {
+    "@types/jest": "^24.0.23",
     "expo": "^35.0.0",
     "expo-location": "~7.0.0",
     "expo-permissions": "^7.0.0",
@@ -25,6 +27,9 @@
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-react": "^7.16.0",
+    "jest": "^24.9.0",
+    "jest-expo": "^35.0.0",
+    "prettier": "^1.19.1",
     "typescript": "^3.7.2"
   },
   "private": true

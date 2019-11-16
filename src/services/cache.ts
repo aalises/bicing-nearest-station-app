@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { StationInfoAPIResponse } from '../services/fetchStationsData';
 
-const TTL = 600;
+export const TTL = 600;
 const CACHE_KEY = 'station_data';
 
 type CacheOperationResponse = {

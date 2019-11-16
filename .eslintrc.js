@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-use-before-define': OFF,
     '@typescript-eslint/explicit-function-return-type': OFF,
+    '@typescript-eslint/camelcase': OFF,
   },
 };

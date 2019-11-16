@@ -4,7 +4,7 @@ import {
   hasServicesEnabledAsync,
 } from 'expo-location';
 import { LOCATION, askAsync } from 'expo-permissions';
-import ERRORS, { Error } from '../utils/constants/errors';
+import ERRORS, { Error } from '../constants/errors';
 
 const getLocationPermissions = async (): Promise<boolean> => {
   const { status } = await askAsync(LOCATION);

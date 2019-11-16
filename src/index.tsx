@@ -18,14 +18,13 @@ import fetchStationsData, {
 } from './services/fetchStationsData';
 
 import getClosestStation from './utils/getClosestStation';
-import { Error } from './utils/constants/errors';
+import { Error } from './constants/errors';
 
 const App = () => {
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
   const [closestStation, setClosestStation] = React.useState<StationInfo>(null);
   const [error, setError] = React.useState<Error>(null);
   const [location, setLocation] = React.useState<LocationData>(null);
-
   const isDirectionButtonEnabled = closestStation && location;
 
   React.useEffect(() => {

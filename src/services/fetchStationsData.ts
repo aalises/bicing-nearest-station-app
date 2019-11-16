@@ -1,4 +1,4 @@
-import ERRORS, { Error } from '../utils/constants/errors';
+import ERRORS, { Error } from '../constants/errors';
 import {
   getCachedData,
   setCachedData,
@@ -65,9 +65,8 @@ export type StationInfo = {
 const fetchStationsData = async (): Promise<StationsInfo | Error> => {
   try {
     let stationInfoData: StationInfoAPIResponse = null;
-    //Set the info data from the cache if it's valid or fetch it otherwise
     const isDataCacheValid = await isDataCachedValid();
-
+    //Set the info data from the cache if it's valid or fetch it otherwise
     if (isDataCacheValid) {
       const { data } = await getCachedData();
       stationInfoData = data;
@@ -95,29 +94,32 @@ const fetchStationsData = async (): Promise<StationsInfo | Error> => {
   }
 };
 
-const sanitizeStationsData = (
+export const sanitizeStationsData = (
   stationInfoData: StationInfoAPIResponse,
   stationStatusData: StationStatusAPIResponse,
 ): StationsInfo => {
-  const sanitizedStationInfo = stationInfoData.data.stations.map(station => ({
-    capacity: station.capacity,
-    id: station.station_id,
-    name: station.name,
-    latitude: station.lat,
-    longitude: station.lon,
-  }));
+  if (!(stationInfoData && stationStatusData)) return null;
 
-  const sanitizedStationStatus = stationStatusData.data.stations.map(
+  const sanitizedStationInfo = stationInfoData?.data?.stations?.map(
     station => ({
-      id: station.station_id,
-      numBikesAvailable: station.num_bikes_available,
-      status: station.status,
+      capacity: station?.capacity,
+      id: station?.station_id,
+      name: station?.name,
+      latitude: station?.lat,
+      longitude: station?.lon,
     }),
   );
 
+  const sanitizedStationStatus = stationStatusData?.data?.stations?.map(
+    station => ({
+      id: station?.station_id,
+      numBikesAvailable: station?.num_bikes_available,
+      status: station?.status,
+    }),
+  );
   const sanitizedStations = sanitizedStationInfo
     .map(station => ({
-      ...sanitizedStationStatus.find(({ id }) => id === station.id),
+      ...sanitizedStationStatus.find(({ id }) => id === station?.id),
       ...station,
     }))
     .filter(({ status }) => status === 'IN_SERVICE');
