@@ -1,4 +1,5 @@
 import { sanitizeStationsData, filterByMode } from '../fetchStationsData';
+import { StationsFixture } from '../../constants/__fixtures__';
 
 describe('sanitizeStationsData', () => {
   it('Returns null if one or more arguments are not provided', () => {
@@ -69,28 +70,8 @@ describe('sanitizeStationsData', () => {
 });
 
 describe('filterByMode', () => {
-  const stationsInfo = [
-    {
-      capacity: 20,
-      id: 3,
-      latitude: 112.2,
-      longitude: 3.43,
-      name: 'No Bikes available here sorry mate',
-      numBikesAvailable: 0,
-      numDocksAvailable: 20,
-      status: 'IN_SERVICE',
-    },
-    {
-      capacity: 20,
-      id: 19,
-      latitude: 119.2,
-      longitude: 9.42,
-      name: 'No Spaces available here sorry mate',
-      numBikesAvailable: 20,
-      numDocksAvailable: 0,
-      status: 'IN_SERVICE',
-    },
-  ];
+  const stationsInfo = StationsFixture.noBikesOrSpaces;
+
   it('Correctly filters out stations with no bikes on RENT mode', () => {
     const filteredBikes = filterByMode(stationsInfo, 'RENT');
 

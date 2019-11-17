@@ -30,6 +30,7 @@
     "jest": "^24.9.0",
     "jest-expo": "^35.0.0",
     "prettier": "^1.19.1",
+    "react-native-testing-library": "^1.11.1",
     "typescript": "^3.7.2"
   },
   "private": true

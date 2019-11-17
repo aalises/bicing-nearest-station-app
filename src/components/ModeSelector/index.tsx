@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 
 export type Modes = 'RENT' | 'RETURN';
 
-const modes = [
+const modes: Array<{ key: Modes; label: string }> = [
   { key: 'RENT', label: 'Rent a bike' },
   { key: 'RETURN', label: 'Return a bike' },
 ];
@@ -14,7 +14,7 @@ type Props = {
 const ModeSelector = ({ onChangeMode }: Props) => {
   const [mode, setMode] = React.useState<Modes>('RENT');
 
-  const handleChangeMode = (key: Modes) => {
+  const handleChangeMode = (key: Modes): void => {
     setMode(key);
     onChangeMode(key);
   };
@@ -24,7 +24,7 @@ const ModeSelector = ({ onChangeMode }: Props) => {
       <View style={styles.containerInner}>
         {modes.map(({ label, key }) => (
           <Button
-            onPress={() => handleChangeMode(key as Modes)}
+            onPress={() => handleChangeMode(key)}
             key={`Button_${key}`}
             title={label}
             color={mode === key && '#00007f'}
@@ -41,11 +41,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginBottom: 16,
     alignItems: 'center',
+    alignSelf: 'flex-start',
   },
   containerInner: {
     marginLeft: 8,
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#C8C8C8',
   },
 });

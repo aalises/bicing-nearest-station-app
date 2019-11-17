@@ -4,14 +4,13 @@ import {
   Text,
   View,
   ScrollView,
-  Button,
   RefreshControl,
 } from 'react-native';
 import { registerRootComponent } from 'expo'; // import it explicitly
 import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
-import getDirections from 'react-native-google-maps-directions';
 import ModeSelector, { Modes } from './components/ModeSelector';
+import OpenMapsButton from './components/OpenMapsButton';
 
 import fetchStationsData, {
   StationInfo,
@@ -19,13 +18,13 @@ import fetchStationsData, {
 } from './services/fetchStationsData';
 import getClosestStation from './utils/getClosestStation';
 import { Error } from './constants/errors';
+import { BackgroundBody } from './constants/designTokens';
 
 const App = () => {
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
   const [closestStation, setClosestStation] = React.useState<StationInfo>(null);
   const [error, setError] = React.useState<Error>(null);
   const [location, setLocation] = React.useState<LocationData>(null);
-  const isDirectionButtonEnabled = closestStation && location;
   const [mode, setMode] = React.useState<Modes>('RENT');
 
   React.useEffect(() => {
@@ -37,26 +36,6 @@ const App = () => {
     await getClosestStationData();
     setRefreshing(false);
   }, [refreshing]);
-
-  const openInMaps = () => {
-    const directionData = {
-      source: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      },
-      destination: {
-        latitude: closestStation.latitude,
-        longitude: closestStation.longitude,
-      },
-      params: [
-        {
-          key: 'travelmode',
-          value: mode === 'RENT' ? 'walking' : 'bicycling',
-        },
-      ],
-    };
-    getDirections(directionData);
-  };
 
   // Gets the station data and computes the closest station from the given location
   const getClosestStationData = async (): Promise<void> => {
@@ -92,7 +71,7 @@ const App = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <ModeSelector onChangeMode={key => setMode(key)} />
-        <Text>
+        <Text style={styles.text}>
           {closestStation
             ? `The closest station is ${
                 closestStation.name
@@ -103,10 +82,10 @@ const App = () => {
             : !error && 'Loading'}
         </Text>
         {error && <Text>{error.message}</Text>}
-        <Button
-          disabled={!isDirectionButtonEnabled}
-          onPress={openInMaps}
-          title='Open in Maps'
+        <OpenMapsButton
+          location={location}
+          closestStation={closestStation}
+          mode={mode}
         />
       </ScrollView>
     </View>
@@ -116,9 +95,12 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: BackgroundBody,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    paddingBottom: 16,
   },
 });
 
