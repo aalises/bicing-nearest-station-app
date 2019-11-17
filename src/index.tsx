@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,12 +11,12 @@ import { registerRootComponent } from 'expo'; // import it explicitly
 import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
 import getDirections from 'react-native-google-maps-directions';
+import ModeSelector, { Modes } from './components/ModeSelector';
 
 import fetchStationsData, {
   StationInfo,
   StationsInfo,
 } from './services/fetchStationsData';
-
 import getClosestStation from './utils/getClosestStation';
 import { Error } from './constants/errors';
 
@@ -26,10 +26,11 @@ const App = () => {
   const [error, setError] = React.useState<Error>(null);
   const [location, setLocation] = React.useState<LocationData>(null);
   const isDirectionButtonEnabled = closestStation && location;
+  const [mode, setMode] = React.useState<Modes>('RENT');
 
   React.useEffect(() => {
     (async (): Promise<void> => await getClosestStationData())();
-  }, []);
+  }, [mode]);
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -66,7 +67,7 @@ const App = () => {
 
     setLocation(maybeLocation as LocationData);
 
-    const maybeStationsData = await fetchStationsData();
+    const maybeStationsData = await fetchStationsData(mode);
 
     if ((maybeStationsData as Error).code)
       return setError(maybeStationsData as Error);
@@ -90,6 +91,7 @@ const App = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
+        <ModeSelector onChangeMode={key => setMode(key)} />
         <Text>
           {closestStation
             ? `The closest station is ${

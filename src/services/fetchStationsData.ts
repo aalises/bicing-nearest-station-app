@@ -4,6 +4,7 @@ import {
   setCachedData,
   isDataCachedValid,
 } from '../services/cache';
+import { Modes } from '../components/ModeSelector';
 
 export type StationInfoAPIResponse = {
   last_updated: number;
@@ -60,9 +61,12 @@ export type StationInfo = {
   latitude: number;
   longitude: number;
   numBikesAvailable: number;
+  numDocksAvailable: number;
 };
 
-const fetchStationsData = async (): Promise<StationsInfo | Error> => {
+const fetchStationsData = async (
+  mode?: Modes,
+): Promise<StationsInfo | Error> => {
   try {
     let stationInfoData: StationInfoAPIResponse = null;
     const isDataCacheValid = await isDataCachedValid();
@@ -88,15 +92,33 @@ const fetchStationsData = async (): Promise<StationsInfo | Error> => {
 
     if (!stationStatusData) return ERRORS.FETCH;
 
-    return sanitizeStationsData(stationInfoData, stationStatusData);
+    return sanitizeStationsData(stationInfoData, stationStatusData, mode);
   } catch (error) {
     return ERRORS.FETCH;
   }
 };
 
+//Filters out the stations that do not have bikes or do not have available
+//spaces based on the mode (return or rent)
+export const filterByMode = (
+  stationsInfo: StationInfo[],
+  mode: Modes,
+): StationInfo[] => {
+  if (mode === 'RENT') {
+    return stationsInfo.filter(
+      ({ numBikesAvailable }) => numBikesAvailable !== 0,
+    );
+  }
+
+  return stationsInfo.filter(
+    ({ numDocksAvailable }) => numDocksAvailable !== 0,
+  );
+};
+
 export const sanitizeStationsData = (
   stationInfoData: StationInfoAPIResponse,
   stationStatusData: StationStatusAPIResponse,
+  mode?: Modes,
 ): StationsInfo => {
   if (!(stationInfoData && stationStatusData)) return null;
 
@@ -114,6 +136,7 @@ export const sanitizeStationsData = (
     station => ({
       id: station?.station_id,
       numBikesAvailable: station?.num_bikes_available,
+      numDocksAvailable: station?.num_docks_available,
       status: station?.status,
     }),
   );
@@ -126,7 +149,7 @@ export const sanitizeStationsData = (
 
   return {
     data: {
-      stations: sanitizedStations,
+      stations: filterByMode(sanitizedStations, mode ?? 'RENT'),
     },
   };
 };

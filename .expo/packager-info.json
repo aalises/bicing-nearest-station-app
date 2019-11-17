@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 9311,
-  "expoServerNgrokUrl": "https://id-afa.anonymous.bicing-nearest-station-app.exp.direct",
-  "packagerNgrokUrl": "https://packager.id-afa.anonymous.bicing-nearest-station-app.exp.direct",
-  "ngrokPid": 9321
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
