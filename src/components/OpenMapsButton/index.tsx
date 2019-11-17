@@ -9,6 +9,8 @@ import {
   DefaultTextColor,
   DisabledTextColor,
   BackgroundBody,
+  SpaceXSmall,
+  SpaceSmall,
 } from '../../constants/designTokens';
 type Props = {
   closestStation: StationInfo;
@@ -62,8 +64,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: BackgroundBody,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: SpaceSmall,
+    paddingVertical: SpaceXSmall,
     borderWidth: 1,
     borderRadius: 6,
     borderColor: DefaultTextColor,
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: DefaultTextColor,
-    paddingRight: 8,
+    paddingRight: SpaceSmall,
   },
   disabled: {
     color: DisabledTextColor,

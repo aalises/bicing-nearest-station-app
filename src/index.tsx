@@ -11,7 +11,7 @@ import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
 import ModeSelector, { Modes } from './components/ModeSelector';
 import OpenMapsButton from './components/OpenMapsButton';
-
+import { SpaceBig, SpaceSmall } from './constants/designTokens';
 import fetchStationsData, {
   StationInfo,
   StationsInfo,
@@ -98,9 +98,10 @@ const styles = StyleSheet.create({
     backgroundColor: BackgroundBody,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: SpaceSmall,
   },
   text: {
-    paddingBottom: 16,
+    paddingBottom: SpaceBig,
   },
 });
 

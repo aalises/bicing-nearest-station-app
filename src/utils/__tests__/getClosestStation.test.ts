@@ -33,7 +33,10 @@ describe('getClosestStation', () => {
       },
     };
     expect(
-      getClosestStation(invalidStationsInfo, LocationsFixture[0]),
+      getClosestStation(
+        invalidStationsInfo,
+        LocationsFixture.BeihaiParkBeijing,
+      ),
     ).toMatchObject(ERRORS.CLOSEST);
   });
   expect(getClosestStation(null, null)).toMatchObject(ERRORS.CLOSEST);
