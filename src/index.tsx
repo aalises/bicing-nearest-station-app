@@ -51,7 +51,7 @@ const App = () => {
       params: [
         {
           key: 'travelmode',
-          value: 'walking',
+          value: mode === 'RENT' ? 'walking' : 'bicycling',
         },
       ],
     };
