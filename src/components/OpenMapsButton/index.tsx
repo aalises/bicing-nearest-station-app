@@ -45,12 +45,14 @@ const OpenMapsButton = ({ closestStation, location, mode }: Props) => {
     <TouchableOpacity
       activeOpacity={0.7}
       style={[styles.button, disabled && styles.disabled]}
-      onPress={openInMaps}>
+      onPress={openInMaps}
+      accessible={true}
+      accessibilityRole='button'
+      accessibilityLabel='Open in Maps'>
       <MaterialCommunityIcons
         style={[styles.icon, disabled && styles.disabled]}
         name='map-search-outline'
         size={26}
-        testID='OpenMapsButton_Icon'
       />
       <Text style={[styles.text, disabled && styles.disabled]}>
         Open in Maps

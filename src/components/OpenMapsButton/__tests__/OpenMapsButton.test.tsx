@@ -16,10 +16,8 @@ describe('OpenMapsButton', () => {
       location: null,
       mode: null,
     };
-    const { getByText, getByTestId } = render(<OpenMapsButton {...props} />);
-
-    expect(getByTestId('OpenMapsButton_Icon')).toBeDefined();
-    expect(getByText('Open in Maps')).toBeDefined();
+    const { getByA11yRole } = render(<OpenMapsButton {...props} />);
+    expect(getByA11yRole('button')).toBeDefined();
   });
   it('Calls the onPress callback with the correct data based on mode', () => {
     const { BeihaiParkBeijing } = LocationsFixture;

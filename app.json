@@ -12,7 +12,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/bike.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
