@@ -81,43 +81,44 @@ describe('getCachedData', () => {
 
 describe('isDataCachedValid', () => {
   const mockDataCachedValidAndExpectData = async (mockedFunction, data) => {
-    jest.mock('../cache', () => ({ getCachedData: mockedFunction }));
+    jest.spyOn(AsyncStorage, 'getItem').mockImplementation(mockedFunction);
     expect(await isDataCachedValid()).toMatchObject(data);
   };
-  it('Returns false if the data does not exist or an error was thrown on get cache', () => {
-    mockDataCachedValidAndExpectData(
-      () => ({
-        success: false,
-        data: null,
-      }),
-      false,
-    );
-    mockDataCachedValidAndExpectData(
-      () => ({
-        success: true,
-        data: null,
-      }),
-      false,
-    );
+
+  it('Returns false if the data does not exist or an error was thrown on get cache', async () => {
+    mockDataCachedValidAndExpectData(async () => {
+      return new Promise(resolve => {
+        resolve('NonValidJSON');
+      });
+    }, false);
+    mockDataCachedValidAndExpectData(async () => {
+      return new Promise(resolve => {
+        resolve(JSON.stringify({ stationInfoData: null }));
+      });
+    }, false);
   });
-  it('Correcly validates existing data from the cache based on TTL', () => {
-    mockDataCachedValidAndExpectData(
-      () => ({
-        success: true,
-        data: {
-          last_updated: Math.floor(Date.now() / 1000) - TTL * 2,
-        },
-      }),
-      false,
-    );
-    mockDataCachedValidAndExpectData(
-      () => ({
-        success: true,
-        data: {
-          last_updated: Math.floor(Date.now() / 1000) - TTL / 2,
-        },
-      }),
-      true,
-    );
+  it('Correcly validates existing data from the cache based on TTL', async () => {
+    mockDataCachedValidAndExpectData(async () => {
+      return new Promise(resolve => {
+        resolve(
+          JSON.stringify({
+            stationInfoData: {
+              last_updated: Math.floor(Date.now() / 1000) - TTL * 2,
+            },
+          }),
+        );
+      });
+    }, false);
+    mockDataCachedValidAndExpectData(async () => {
+      return new Promise(resolve => {
+        resolve(
+          JSON.stringify({
+            stationInfoData: {
+              last_updated: Math.floor(Date.now() / 1000) - TTL / 2,
+            },
+          }),
+        );
+      });
+    }, true);
   });
 });

@@ -5,7 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "lint": "eslint --config=.eslintrc.js src/**/*",
-    "test": "jest"
+    "test": "jest --config=jest.config.js --coverage"
   },
   "dependencies": {
     "@types/jest": "^24.0.23",

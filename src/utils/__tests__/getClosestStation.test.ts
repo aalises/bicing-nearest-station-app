@@ -15,6 +15,7 @@ describe('getClosestStation', () => {
             latitude: -34.905759,
             longitude: -56.197307,
             numBikesAvailable: 10,
+            numDocksAvailable: 10,
           },
           {
             id: 20,
@@ -24,6 +25,7 @@ describe('getClosestStation', () => {
             latitude: 39.926532,
             longitude: 116.409167,
             numBikesAvailable: 10,
+            numDocksAvailable: 10,
           },
         ],
       },
@@ -68,6 +70,7 @@ describe('getClosestStation', () => {
             latitude: null,
             longitude: -50.197307,
             numBikesAvailable: 10,
+            numDocksAvailable: 10,
           },
           {
             id: 22,
@@ -77,6 +80,7 @@ describe('getClosestStation', () => {
             latitude: null,
             longitude: null,
             numBikesAvailable: 10,
+            numDocksAvailable: 10,
           },
         ],
       },
