@@ -61,6 +61,10 @@ describe('sanitizeStationsData', () => {
             name: 'Best Street 23',
             numBikesAvailable: 10,
             numDocksAvailable: 10,
+            numBikesAvailableTypes: {
+              ebike: 13,
+              mechanical: 10,
+            },
             status: 'IN_SERVICE',
           },
         ],

@@ -4,7 +4,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "lint": "eslint --config=.eslintrc.js src/**/*",
+    "lint": "eslint --config=.eslintrc.js ./src",
+    "typecheck": "tsc -p ./tsconfig.json",
     "test": "jest --config=jest.config.js --coverage"
   },
   "dependencies": {

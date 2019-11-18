@@ -12,6 +12,11 @@ module.exports = {
   env: {
     browser: true,
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {
     '@typescript-eslint/no-use-before-define': OFF,
     '@typescript-eslint/explicit-function-return-type': OFF,

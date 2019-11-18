@@ -62,6 +62,10 @@ export type StationInfo = {
   longitude: number;
   numBikesAvailable: number;
   numDocksAvailable: number;
+  numBikesAvailableTypes: {
+    ebike: number;
+    mechanical: number;
+  };
 };
 
 const fetchStationsData = async (
@@ -137,6 +141,10 @@ export const sanitizeStationsData = (
       id: station?.station_id,
       numBikesAvailable: station?.num_bikes_available,
       numDocksAvailable: station?.num_docks_available,
+      numBikesAvailableTypes: {
+        ebike: station?.num_bikes_available_types?.ebike,
+        mechanical: station?.num_bikes_available_types?.mechanical,
+      },
       status: station?.status,
     }),
   );

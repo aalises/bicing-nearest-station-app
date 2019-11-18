@@ -5,6 +5,9 @@ import {
   DefaultTextColor,
   SpaceMedium,
   SpaceLarge,
+  SpaceSmall,
+  DisabledTextColor,
+  SpaceXSmall,
 } from '../../constants/designTokens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Loader from './Loader';
@@ -40,7 +43,7 @@ const NearestStationCard = ({ closestStation, isLoading }: Props) => {
       accessible={true}
       accessibilityLabel='Nearest Station Info Card'
       style={styles.container}>
-      <View style={styles.leftPanel}>
+      <View style={styles.columnPanel}>
         <MaterialCommunityIcons
           color={DefaultTextColor}
           style={styles.bikeIcon}
@@ -52,9 +55,12 @@ const NearestStationCard = ({ closestStation, isLoading }: Props) => {
             '-'}/${closestStation?.capacity ?? '-'}`}
         </Text>
       </View>
-      <View>
+      <View style={styles.columnPanel}>
         <Text style={[styles.text, styles.textName]}>{`${closestStation?.name ??
           '-'}`}</Text>
+        <Text style={[styles.text, styles.textTypeBike]}>{`⚡ ${closestStation
+          ?.numBikesAvailableTypes?.ebike ?? '-'}   ⚙️ ${closestStation
+          ?.numBikesAvailableTypes?.mechanical ?? '-'}`}</Text>
       </View>
       <View>
         <Text style={styles.text}>
@@ -70,26 +76,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignSelf: 'stretch',
-    alignItems: 'center',
     padding: SpaceMedium,
     marginBottom: SpaceLarge,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 6,
     borderColor: DefaultTextColor,
   },
-  leftPanel: {
+  columnPanel: {
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   bikeIcon: {
-    paddingStart: 7,
+    paddingStart: SpaceXSmall,
   },
   textName: {
-    fontSize: 14,
+    paddingBottom: SpaceSmall,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     color: DefaultTextColor,
+  },
+  textTypeBike: {
+    color: DisabledTextColor,
   },
 });
 
