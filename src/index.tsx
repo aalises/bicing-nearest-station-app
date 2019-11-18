@@ -17,6 +17,7 @@ import fetchStationsData, {
   StationsInfo,
 } from './services/fetchStationsData';
 import getClosestStation from './utils/getClosestStation';
+import ErrorMessage from './components/ErrorMessage';
 import { Error } from './constants/errors';
 import { BackgroundBody } from './constants/designTokens';
 
@@ -81,7 +82,7 @@ const App = () => {
               } bike(s) out of ${closestStation.capacity}`
             : !error && 'Loading'}
         </Text>
-        {error && <Text>{error.message}</Text>}
+        {error && <ErrorMessage error={error} />}
         <OpenMapsButton
           location={location}
           closestStation={closestStation}
