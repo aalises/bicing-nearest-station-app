@@ -11,6 +11,7 @@ import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
 import ModeSelector, { Modes } from './components/ModeSelector';
 import OpenMapsButton from './components/OpenMapsButton';
+import NearestStationCard from './components/NearestStationCard';
 import {
   SpaceLarge,
   SpaceXLarge,
@@ -79,16 +80,10 @@ const App = () => {
           Where is the nearest Bicing Station? 🚲
         </Text>
         <ModeSelector onChangeMode={key => setMode(key)} />
-        <Text style={styles.text}>
-          {closestStation
-            ? `The closest station is ${
-                closestStation.name
-              }, which is ${closestStation.distance ||
-                '-'}m away, and has available ${
-                closestStation.numBikesAvailable
-              } bike(s) out of ${closestStation.capacity}`
-            : !error && 'Loading'}
-        </Text>
+        <NearestStationCard
+          closestStation={closestStation}
+          isLoading={!closestStation && !error}
+        />
         {error && <ErrorMessage error={error} />}
         <OpenMapsButton
           location={location}
