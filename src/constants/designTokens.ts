@@ -4,7 +4,6 @@ export const DisabledTextColor = '#A9A9A9';
 export const BackgroundBody = '#FFFFFF';
 export const AlertBackgroundBody = '#faeaea';
 export const AlertTextColor = '#970c0c';
-export const SpaceXXSmall = 4;
 export const SpaceXSmall = 4;
 export const SpaceSmall = 8;
 export const SpaceMedium = 16;
