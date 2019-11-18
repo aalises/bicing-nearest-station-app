@@ -8,4 +8,5 @@ export const SpaceXXSmall = 4;
 export const SpaceXSmall = 4;
 export const SpaceSmall = 8;
 export const SpaceMedium = 16;
-export const SpaceBig = 24;
+export const SpaceLarge = 24;
+export const SpaceXLarge = 32;

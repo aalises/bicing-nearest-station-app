@@ -11,7 +11,11 @@ import getLocationAsync from './services/location';
 import { LocationData } from 'expo-location';
 import ModeSelector, { Modes } from './components/ModeSelector';
 import OpenMapsButton from './components/OpenMapsButton';
-import { SpaceBig, SpaceSmall } from './constants/designTokens';
+import {
+  SpaceLarge,
+  SpaceXLarge,
+  HighlightedTextColor,
+} from './constants/designTokens';
 import fetchStationsData, {
   StationInfo,
   StationsInfo,
@@ -71,6 +75,9 @@ const App = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
+        <Text style={styles.header} adjustsFontSizeToFit numberOfLines={1}>
+          Where is the nearest Bicing Station? 🚲
+        </Text>
         <ModeSelector onChangeMode={key => setMode(key)} />
         <Text style={styles.text}>
           {closestStation
@@ -99,10 +106,17 @@ const styles = StyleSheet.create({
     backgroundColor: BackgroundBody,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: SpaceSmall,
+    paddingHorizontal: 10,
   },
   text: {
-    paddingBottom: SpaceBig,
+    paddingBottom: SpaceLarge,
+  },
+  header: {
+    fontSize: 20,
+    color: HighlightedTextColor,
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    paddingBottom: SpaceXLarge,
   },
 });
 

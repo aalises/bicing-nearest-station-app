@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {
   DefaultTextColor,
   HighlightedTextColor,
-  SpaceBig,
+  SpaceLarge,
   SpaceMedium,
   SpaceSmall,
 } from '../../constants/designTokens';
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    marginBottom: SpaceBig,
+    marginBottom: SpaceLarge,
     alignItems: 'center',
     alignSelf: 'flex-start',
   },

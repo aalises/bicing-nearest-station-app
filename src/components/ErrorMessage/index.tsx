@@ -6,7 +6,7 @@ import {
   SpaceXSmall,
   SpaceSmall,
   SpaceMedium,
-  SpaceBig,
+  SpaceLarge,
   AlertTextColor,
   AlertBackgroundBody,
 } from '../../constants/designTokens';
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: AlertBackgroundBody,
-    marginBottom: SpaceBig,
+    marginBottom: SpaceLarge,
   },
   icon: {
     paddingEnd: SpaceMedium,
