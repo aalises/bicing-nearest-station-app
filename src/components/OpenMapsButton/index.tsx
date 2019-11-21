@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     borderColor: DefaultTextColor,
   },
   text: {
+    fontFamily: 'inter-semi-bold',
     color: DefaultTextColor,
-    fontWeight: 'bold',
   },
   icon: {
     color: DefaultTextColor,

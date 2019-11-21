@@ -12,6 +12,7 @@ import { LocationData } from 'expo-location';
 import ModeSelector, { Modes } from './components/ModeSelector';
 import OpenMapsButton from './components/OpenMapsButton';
 import NearestStationCard from './components/NearestStationCard';
+import useIsFont from './utils/useIsFont';
 import {
   SpaceLarge,
   SpaceXLarge,
@@ -32,6 +33,7 @@ const App = () => {
   const [error, setError] = React.useState<Error>(null);
   const [location, setLocation] = React.useState<LocationData>(null);
   const [mode, setMode] = React.useState<Modes>('RENT');
+  const isFontLoaded = useIsFont();
 
   React.useEffect(() => {
     (async (): Promise<void> => await getClosestStationData())();
@@ -69,7 +71,7 @@ const App = () => {
     setClosestStation(maybeClosestStationData as StationInfo);
   };
 
-  return (
+  return isFontLoaded ? (
     <View style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.container}
@@ -92,7 +94,7 @@ const App = () => {
         />
       </ScrollView>
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
     paddingBottom: SpaceLarge,
   },
   header: {
+    fontFamily: 'inter-bold',
     fontSize: 20,
     color: HighlightedTextColor,
     fontWeight: 'bold',

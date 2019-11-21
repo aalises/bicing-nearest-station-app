@@ -35,7 +35,11 @@ const ModeSelector = ({ onChangeMode }: Props) => {
             key={`ModeSelector_Button_${key}`}
             onPress={() => handleChangeMode(key)}>
             <View style={styles.touchableElement}>
-              <Text style={[styles.text, mode === key && styles.highlighted]}>
+              <Text
+                style={[
+                  styles.textButtons,
+                  mode === key && styles.highlighted,
+                ]}>
                 {label}
               </Text>
             </View>
@@ -62,7 +66,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: DefaultTextColor,
-    fontWeight: 'bold',
+    fontFamily: 'inter-semi-bold',
+  },
+  textButtons: {
+    color: DefaultTextColor,
+    fontFamily: 'inter-regular',
   },
   touchableElement: {
     padding: SpaceSmall,

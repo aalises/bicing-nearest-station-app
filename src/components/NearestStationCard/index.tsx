@@ -90,14 +90,16 @@ const styles = StyleSheet.create({
     paddingStart: SpaceXSmall,
   },
   textName: {
+    fontFamily: 'inter-semi-bold',
     paddingBottom: SpaceSmall,
   },
   text: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontFamily: 'inter-regular',
     color: DefaultTextColor,
   },
   textTypeBike: {
+    fontFamily: 'inter-semi-bold',
     color: DisabledTextColor,
   },
 });

@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     paddingStart: SpaceXSmall,
   },
   text: {
+    fontFamily: 'inter-semi-bold',
     color: AlertTextColor,
-    fontWeight: 'bold',
   },
 });
 
