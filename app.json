@@ -2,12 +2,15 @@
   "expo": {
     "entryPoint": "./src/index.tsx",
     "name": "Bicing Nearest Station App",
-    "description": "Get the nearest Bicing station information from your location",
+    "description": "Get the nearest Bicing station information from your location, can open the directions in Google Maps",
     "slug": "bicing-nearest-station-app",
     "owner": "Albert Alises Sorribas",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/bike.png",
@@ -19,9 +22,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.albertalises.bicingneareststationapp"
+    },
+    "android": {
+      "package": "com.albertalises.bicing_nearest_station_app"
+    },
+    "githubUrl": "https://github.com/aalises/bicing-nearest-station-app"
   }
 }
