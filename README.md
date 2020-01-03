@@ -1,5 +1,7 @@
 # Bicing Nearest Station App 🚴
 
+[Link here](https://expo.io/@yorkeutopy/bicing-nearest-station-app)
+
 Mobile App written in **React Native + Typescript** powered by **Expo** that tells you information about the nearest Bicing station.
 
 **... But why?**
