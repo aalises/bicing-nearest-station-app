@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { StationInfo } from '../../services/fetchStationsData';
+import parseDistance from '../../utils/parseDistance';
 import {
   DefaultTextColor,
   SpaceMedium,
@@ -28,16 +29,6 @@ const NearestStationCard = ({ closestStation, isLoading }: Props) => {
     );
   }
 
-  const parseDistance = (distance: number): string => {
-    if (!distance) return '- m';
-
-    if (distance > 1000) {
-      return `${Math.round((distance / 1000) * 10) / 10} km`;
-    }
-
-    return `${distance} m`;
-  };
-
   return (
     <View
       accessible={true}
@@ -64,7 +55,11 @@ const NearestStationCard = ({ closestStation, isLoading }: Props) => {
       </View>
       <View>
         <Text style={styles.text}>
-          {parseDistance(Number(closestStation?.distance))}
+          {parseDistance(
+            closestStation?.distance
+              ? Number(closestStation?.distance)
+              : undefined,
+          )}
         </Text>
       </View>
     </View>
