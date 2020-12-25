@@ -2,6 +2,9 @@ import * as React from 'react';
 import NearestStationCard from '..';
 import { render } from 'react-native-testing-library';
 import { StationsFixture } from '../../../constants/__fixtures__';
+
+jest.useFakeTimers();
+
 describe('NearestStationCard', () => {
   it('Renders the Loader correctly', () => {
     const { getAllByA11yLabel } = render(
