@@ -12,10 +12,11 @@ import {
 } from '../../constants/designTokens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Loader from './Loader';
-type Props = {
+
+interface Props {
   isLoading: boolean;
   closestStation: StationInfo;
-};
+}
 
 const NearestStationCard = ({ closestStation, isLoading }: Props) => {
   if (isLoading) {

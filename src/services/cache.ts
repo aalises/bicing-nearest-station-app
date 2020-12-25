@@ -4,10 +4,10 @@ import { StationInfoAPIResponse } from '../services/fetchStationsData';
 export const TTL = 600;
 const CACHE_KEY = 'station_data';
 
-type CacheOperationResponse = {
+interface CacheOperationResponse {
   success: boolean;
   data: StationInfoAPIResponse;
-};
+}
 
 export const setCachedData = async (
   stationInfo: string,

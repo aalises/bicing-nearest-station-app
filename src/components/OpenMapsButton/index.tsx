@@ -12,11 +12,12 @@ import {
   SpaceXSmall,
   SpaceSmall,
 } from '../../constants/designTokens';
-type Props = {
+
+interface Props {
   closestStation: StationInfo;
   location: LocationData;
   mode: Modes;
-};
+}
 
 const OpenMapsButton = ({ closestStation, location, mode }: Props) => {
   const disabled = !(closestStation && location);

@@ -6,16 +6,16 @@ import {
 } from '../services/cache';
 import { Modes } from '../components/ModeSelector';
 
-export type StationInfoAPIResponse = {
+export interface StationInfoAPIResponse {
   last_updated: number;
   ttl: number;
   data: {
     stations: Array<{
       address: string;
-      altitude: number;
       capacity: number;
       lat: number;
       lon: number;
+      altitude: number;
       name: string;
       nearby_distance: number;
       physical_configuration: 'MECHANICBIKESTATION' | 'ELECTRICBIKESTATION';
@@ -23,13 +23,14 @@ export type StationInfoAPIResponse = {
       station_id: number;
     }>;
   };
-};
+}
 
-type StationStatusAPIResponse = {
+interface StationStatusAPIResponse {
   last_updated: number;
   ttl: number;
   data: {
     stations: Array<{
+      station_id: number;
       is_charging_station: boolean;
       is_installed: 1 | 0;
       is_renting: 1 | 0;
@@ -41,19 +42,18 @@ type StationStatusAPIResponse = {
         mechanical: number;
       };
       num_docks_available: number;
-      station_id: number;
       status: 'IN_SERVICE' | 'CLOSED';
     }>;
   };
-};
+}
 
-export type StationsInfo = {
+export interface StationsInfo {
   data: {
     stations: Array<StationInfo>;
   };
-};
+}
 
-export type StationInfo = {
+export interface StationInfo {
   id: number;
   name: string;
   capacity: number;
@@ -66,7 +66,7 @@ export type StationInfo = {
     ebike: number;
     mechanical: number;
   };
-};
+}
 
 const fetchStationsData = async (
   mode?: Modes,

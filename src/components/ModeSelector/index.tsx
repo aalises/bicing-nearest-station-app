@@ -15,9 +15,10 @@ export const modes: Array<{ key: Modes; label: string }> = [
   { key: 'RETURN', label: 'Return a bike' },
 ];
 
-type Props = {
+interface Props {
   onChangeMode: (key: Modes) => void;
-};
+}
+
 const ModeSelector = ({ onChangeMode }: Props) => {
   const [mode, setMode] = React.useState<Modes>('RENT');
 

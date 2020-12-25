@@ -3,10 +3,11 @@ import { LocationData } from 'expo-location';
 import getDistance from 'geolib/es/getDistance';
 import ERRORS, { Error } from '../constants/errors';
 
-type ClosestStationID = {
+interface ClosestStationID {
   id: number;
   distance: number;
-};
+}
+
 const getClosestStation = (
   stations: StationsInfo,
   location: LocationData,

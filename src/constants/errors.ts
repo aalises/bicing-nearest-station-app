@@ -1,7 +1,7 @@
-export type Error = {
+export interface Error {
   code: string;
   message: string;
-};
+}
 
 const ERRORS: { [key: string]: Error } = {
   FETCH: {

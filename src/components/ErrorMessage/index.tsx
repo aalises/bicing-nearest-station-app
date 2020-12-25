@@ -11,9 +11,10 @@ import {
   AlertBackgroundBody,
 } from '../../constants/designTokens';
 
-type Props = {
+interface Props {
   error: Error;
-};
+}
+
 const ErrorMessage = ({ error }: Props) => {
   const { message } = error;
 
