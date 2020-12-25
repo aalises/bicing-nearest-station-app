@@ -1,4 +1,5 @@
 # Bicing Nearest Station App 🚴
+[![Coverage Status](https://coveralls.io/repos/github/aalises/bicing-nearest-station-app/badge.svg?branch=master)](https://coveralls.io/github/aalises/bicing-nearest-station-app?branch=master)
 
 [Link here](https://expo.io/@yorkeutopy/bicing-nearest-station-app)
 
